@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CivCampusExercise_2021.models
@@ -13,12 +14,12 @@ namespace CivCampusExercise_2021.models
             this.Rooms = new List<Room>();
         }
 
-        public void AddRoom(int capacity, int roomNo) {
+        public void AddRoom(uint capacity, int roomNo) {
             //TODO: make roomId a string created from buildingId + RoomNo as text
-            string roomId = buildingid + roomNo;
+            string roomId = BuildingId + roomNo;
             
             //TODO: fix the below to add the new room to the rooms list
-            Room r1 = new Room(0, 0, null);
+            Room r1 = new Room(capacity, roomNo, roomId);
             Rooms.Add(r1);
         }
 
@@ -35,17 +36,16 @@ namespace CivCampusExercise_2021.models
             return output;
         }
 
-        public int GetBuildingCapacity() {
-            int total = 0;
-            return total; 
-         }   
+    
            
         // TODO: calculate and store into total all of the room capacities for the building combined
-        public int GetBuildingsTotal() {
-            foreach(var BuildingId in Building) {
-                buildingstotal += $"{BuildingId.Building}, {total.GetBuildingCapacity}\n";
+        public int GetBuildingCapacity() {
+            int total = 0;
+            foreach(Room room in Rooms) {
+                int cap = Convert.ToInt32(room.Capacity);
+                total += cap;
             }
-            return buildingstotal;
+            return total;
         }
         
     }
